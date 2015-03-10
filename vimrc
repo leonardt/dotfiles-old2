@@ -15,6 +15,20 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Shougo/neocomplete.vim'
+NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'tpope/vim-surround'
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'hynek/vim-python-pep8-indent'
 " NeoBundle 'justinmk/vim-sneak'
@@ -114,3 +128,22 @@ nmap t <Plug>(easymotion-t2)
 
 " python-syntax
 let python_highlight_all = 1
+
+" unite
+nnoremap <leader>b :<C-u>Unite buffer<CR>
+nnoremap <leader>f :<C-u>Unite file_rec/async:!<CR>
+nnoremap <leader>g :<C-u>Unite grep:.<CR>
+
+call unite#custom#profile('default', 'context', {
+\   'start_insert': 1,
+\   'winheight': 10,
+\ })
+if executable('ag')
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts =
+                \ '-i --line-numbers --nocolor --nogroup --hidden --skip-vcs-ignores'
+    let g:unite_source_grep_recursive_opt = ''
+    let g:unite_source_rec_async_command =
+                \ 'ag --follow --nocolor --nogroup --hidden --skip-vcs-ignores -g ""'
+endif
+call unite#filters#matcher_default#use(['matcher_fuzzy'])

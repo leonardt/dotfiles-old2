@@ -29,6 +29,10 @@ NeoBundle 'Shougo/vimproc.vim', {
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-commentary'
 NeoBundle 'tpope/vim-surround'
+NeoBundle 'tpope/vim-repeat'
+NeoBundle 'tpope/vim-markdown'
+NeoBundle 'tpope/vim-endwise'
+
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'hynek/vim-python-pep8-indent'
 " NeoBundle 'justinmk/vim-sneak'
@@ -36,6 +40,7 @@ NeoBundle 'hdima/python-syntax'
 NeoBundle 'lokaltog/vim-easymotion'
 
 NeoBundle 'w0ng/vim-hybrid'
+NeoBundle 'w0ng/vim-airline'
 
 call neobundle#end()
 filetype plugin indent on
@@ -76,6 +81,7 @@ set mouse=a
 set lazyredraw
 set hidden
 set fcs=vert:│
+set laststatus=2
 
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -147,3 +153,6 @@ if executable('ag')
                 \ 'ag --follow --nocolor --nogroup --hidden --skip-vcs-ignores -g ""'
 endif
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+
+let g:airline_theme = 'hybridline'
+let g:airline_powerline_fonts = 1

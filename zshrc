@@ -10,3 +10,11 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 else
   alias ls='ls --color' #I like color
 fi
+
+export WORKON_HOME=$HOME/.envs
+
+if [ -z $HOME/.envs ]; then
+  mkdir $HOME/.envs
+fi
+
+source /usr/local/bin/virtualenvwrapper.sh

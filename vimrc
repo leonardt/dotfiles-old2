@@ -37,6 +37,7 @@ NeoBundle 'tpope/vim-markdown'
 NeoBundle 'tpope/vim-endwise'
 
 NeoBundle 'szw/vim-ctrlspace'
+NeoBundle 'Raimondi/delimitMate'
 
 NeoBundle 'davidhalter/jedi-vim'
 NeoBundle 'hynek/vim-python-pep8-indent'
@@ -176,12 +177,11 @@ let python_highlight_all = 1
 
 " unite {{{
 nnoremap <leader>b :<C-u>Unite buffer<CR>
-nnoremap <leader>f :<C-u>Unite file_rec/async:!<CR>
+nnoremap <C-p> :<C-u>Unite file_rec/async:!<CR>
 nnoremap <leader>g :<C-u>Unite grep:.<CR>
 
 call unite#custom#profile('default', 'context', {
 \   'start_insert': 1,
-\   'winheight': 10,
 \ })
 if executable('ag')
     let g:unite_source_grep_command = 'ag'
@@ -242,4 +242,9 @@ augroup ft_vim
 
 	au FileType vim setlocal foldmethod=marker
 augroup END
+" }}}
+
+" delimitmate {{{
+let delimitMate_expand_cr = 1
+au FileType python let b:delimitMate_nesting_quotes = ['"']
 " }}}

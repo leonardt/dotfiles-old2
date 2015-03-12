@@ -10,3 +10,5 @@ if [[ $(uname -s) == 'Darwin' ]]; then
 else
   alias ls='ls --color' #I like color
 fi
+
+export PATH=/usr/texbin:"$PATH"

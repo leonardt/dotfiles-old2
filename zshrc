@@ -12,3 +12,10 @@ else
 fi
 
 export PATH=/usr/texbin:"$PATH"
+export WORKON_HOME=$HOME/.envs
+
+if [ -z $HOME/.envs ]; then
+  mkdir $HOME/.envs
+fi
+
+source /usr/local/bin/virtualenvwrapper.sh

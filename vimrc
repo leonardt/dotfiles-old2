@@ -80,9 +80,7 @@ set smartcase
 
 set wrap
 set textwidth=80
-
-" set number
-" set relativenumber
+" set number set relativenumber
 
 set cursorline
 
@@ -171,12 +169,15 @@ nmap s <Plug>(easymotion-s2)
 nmap t <Plug>(easymotion-t2)
 " }}}
 
-" python-syntax {{{
-let python_highlight_all = 1
+" python {{{
+let python_highlight_all = 1  " python-syntax
+let g:jedi#use_tabs_not_buffers = 0
+let g:jedi#use_splits_not_buffers = "left"
+let g:jedi#show_call_signatures = 0
 " }}}
 
 " unite {{{
-nnoremap <leader>b :<C-u>Unite buffer<CR>
+nnoremap <leader><Space>  :<C-u>Unite buffer<CR>
 nnoremap <C-p> :<C-u>Unite file_rec/async:!<CR>
 nnoremap <leader>g :<C-u>Unite grep:.<CR>
 

@@ -19,3 +19,5 @@ if [ -z $HOME/.envs ]; then
 fi
 
 source /usr/local/bin/virtualenvwrapper.sh
+
+export PATH=/usr/local/cuda/bin:$PATH

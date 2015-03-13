@@ -21,3 +21,23 @@ fi
 source /usr/local/bin/virtualenvwrapper.sh
 
 export PATH=/usr/local/cuda/bin:$PATH
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Completion
+autoload -Uz compinit
+compinit
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+export EDITOR='vim'
+
+# git
+alias gst='git status'
+alias gpl='git pull'
+alias gps='git push'
+alias gco='git checkout'
+alias gc='git commit'
+alias ga='git add'

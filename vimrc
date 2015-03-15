@@ -48,7 +48,7 @@ NeoBundle 'hdima/python-syntax'
 NeoBundle 'lokaltog/vim-easymotion'
 
 NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'w0ng/vim-airline'
+NeoBundle 'bling/vim-airline'
 
 call neobundle#end()
 filetype plugin indent on

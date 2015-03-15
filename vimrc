@@ -10,50 +10,60 @@ if has('vim_starting')
  " Required:
  set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
+
+filetype plugin indent on
 " }}}
 
 " plugins {{{
-call neobundle#begin(expand('~/.vim/bundle/'))
+call plug#begin('~/.vim/plugged')
+" call neobundle#begin(expand('~/.vim/bundle/'))
 
-NeoBundleFetch 'Shougo/neobundle.vim'
+" NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle 'Shougo/neocomplete.vim'
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimproc.vim', {
-\ 'build' : {
-\     'windows' : 'tools\\update-dll-mingw',
-\     'cygwin' : 'make -f make_cygwin.mak',
-\     'mac' : 'make -f make_mac.mak',
-\     'linux' : 'make',
-\     'unix' : 'gmake',
-\    },
-\ }
+" NeoBundle 'Shougo/neocomplete.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'tpope/vim-commentary'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-repeat'
-NeoBundle 'tpope/vim-markdown'
-NeoBundle 'tpope/vim-endwise'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" NeoBundle 'Shougo/neosnippet'
+" NeoBundle 'Shougo/neosnippet-snippets'
+" NeoBundle 'Shougo/unite.vim'
+" NeoBundle 'Shougo/vimproc.vim', {
+" \ 'build' : {
+" \     'windows' : 'tools\\update-dll-mingw',
+" \     'cygwin' : 'make -f make_cygwin.mak',
+" \     'mac' : 'make -f make_mac.mak',
+" \     'linux' : 'make',
+" \     'unix' : 'gmake',
+" \    },
+" \ }
 
-NeoBundle 'szw/vim-ctrlspace'
-NeoBundle 'Raimondi/delimitMate'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-endwise'
 
-NeoBundle 'davidhalter/jedi-vim'
-NeoBundle 'hynek/vim-python-pep8-indent'
-" NeoBundle 'justinmk/vim-sneak'
-NeoBundle 'hdima/python-syntax'
-NeoBundle 'lokaltog/vim-easymotion'
+Plug 'szw/vim-ctrlspace'
+Plug 'Raimondi/delimitMate'
 
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'bling/vim-airline'
+" Plug 'davidhalter/jedi-vim'
+Plug 'hynek/vim-python-pep8-indent'
+" Plug 'justinmk/vim-sneak'
+Plug 'hdima/python-syntax'
+Plug 'lokaltog/vim-easymotion'
 
-call neobundle#end()
-filetype plugin indent on
+Plug 'w0ng/vim-hybrid'
+Plug 'bling/vim-airline'
 
-NeoBundleCheck
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'rking/ag.vim'
+
+call plug#end()
+" call neobundle#end()
+
+" NeoBundleCheck
 " }}}
 
 set encoding=utf-8
@@ -99,6 +109,15 @@ set visualbell
 " Save when losing focus
 au FocusLost * :silent! wall
 
+fun! StripTrailingWhiteSpace()
+  " don't strip on these filetypes
+  if &ft =~ 'markdown'
+    return
+  endif
+  %s/\s\+$//e
+endfun
+autocmd bufwritepre * :call StripTrailingWhiteSpace()
+
 " Wildmenu completion {{{
 
 set wildmenu
@@ -132,48 +151,48 @@ colorscheme hybrid
 " }}}
 
 " Neocomplete {{{
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neocomplete#sources#syntax#min_keyword_length = 3
-let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
-if !exists('g:neocomplete#keyword_patterns')
-  let g:neocomplete#keyword_patterns = {}
-endif
-let g:neocomplete#keyword_patterns['default'] = '\h\w*'
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
-  " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
-endfunction
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" let g:neocomplete#enable_at_startup = 1
+" let g:neocomplete#enable_smart_case = 1
+" let g:neocomplete#sources#syntax#min_keyword_length = 3
+" let g:neocomplete#lock_buffer_name_pattern = '\*ku\*'
+" if !exists('g:neocomplete#keyword_patterns')
+"   let g:neocomplete#keyword_patterns = {}
+" endif
+" let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+" inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+" function! s:my_cr_function()
+"   return neocomplete#close_popup() . "\<CR>"
+"   " For no inserting <CR> key.
+"   "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+" endfunction
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-autocmd FileType python setlocal omnifunc=jedi#completions
-let g:jedi#completions_enabled = 0
-let g:jedi#auto_vim_configuration = 0
-if !exists('g:neocomplete#sources#omni#input_patterns')
-  let g:neocomplete#sources#omni#input_patterns = {}
-endif
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_omni_input_patterns.python =
-\ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
-" alternative pattern: '\h\w*\|[^. \t]\.\w*'
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" autocmd FileType python setlocal omnifunc=jedi#completions
+" let g:jedi#completions_enabled = 0
+" let g:jedi#auto_vim_configuration = 0
+" if !exists('g:neocomplete#sources#omni#input_patterns')
+"   let g:neocomplete#sources#omni#input_patterns = {}
+" endif
+" if !exists('g:neocomplete#force_omni_input_patterns')
+"   let g:neocomplete#force_omni_input_patterns = {}
+" endif
+" let g:neocomplete#force_omni_input_patterns.python =
+" \ '\%([^. \t]\.\|^\s*@\|^\s*from\s.\+import \|^\s*from \|^\s*import \)\w*'
+" " alternative pattern: '\h\w*\|[^. \t]\.\w*'
 
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: pumvisible() ? "\<C-n>" : "\<TAB>"
-smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)"
-\: "\<TAB>"
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
+" imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+" xmap <C-k>     <Plug>(neosnippet_expand_target)
+" imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)"
+" \: pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+" \ "\<Plug>(neosnippet_expand_or_jump)"
+" \: "\<TAB>"
+" if has('conceal')
+"   set conceallevel=2 concealcursor=i
+" endif
 " }}}
 
 " easymotion {{{
@@ -186,28 +205,28 @@ nmap t <Plug>(easymotion-t2)
 
 " python {{{
 let python_highlight_all = 1  " python-syntax
-let g:jedi#use_tabs_not_buffers = 0
-let g:jedi#use_splits_not_buffers = "left"
-let g:jedi#show_call_signatures = 0
+" let g:jedi#use_tabs_not_buffers = 0
+" let g:jedi#use_splits_not_buffers = "left"
+" let g:jedi#show_call_signatures = 0
 " }}}
 
 " unite {{{
-nnoremap <leader><Space>  :<C-u>Unite buffer<CR>
-nnoremap <C-p> :<C-u>Unite file_rec/async:!<CR>
-nnoremap <leader>g :<C-u>Unite grep:.<CR>
-
-call unite#custom#profile('default', 'context', {
-\   'start_insert': 1,
-\ })
-if executable('ag')
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts =
-                \ '-i --line-numbers --nocolor --nogroup --hidden --skip-vcs-ignores'
-    let g:unite_source_grep_recursive_opt = ''
-    let g:unite_source_rec_async_command =
-                \ 'ag --follow --nocolor --nogroup --hidden --skip-vcs-ignores -g ""'
-endif
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" nnoremap <leader><Space> :<C-u>Unite buffer<CR>
+" " nnoremap <C-p> :<C-u>Unite file_rec/async:!<CR>
+" nnoremap <leader>g :<C-u>Unite grep:.<CR>
+"
+" call unite#custom#profile('default', 'context', {
+" \   'start_insert': 1,
+" \ })
+" if executable('ag')
+"     let g:unite_source_grep_command = 'ag'
+"     let g:unite_source_grep_default_opts =
+"                 \ '-i --line-numbers --nocolor --nogroup --hidden --skip-vcs-ignores'
+"     let g:unite_source_grep_recursive_opt = ''
+"     let g:unite_source_rec_async_command =
+"                 \ 'ag --follow --nocolor --nogroup --hidden --skip-vcs-ignores -g ""'
+" endif
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
 " }}}
 
 " airline {{{
@@ -263,4 +282,32 @@ augroup END
 " delimitmate {{{
 let delimitMate_expand_cr = 1
 au FileType python let b:delimitMate_nesting_quotes = ['"']
+" }}}
+
+" ultisnips {{{
+let g:UltiSnipsExpandTrigger="<c-k>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" }}}
+
+" ctrlp {{{
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command =
+    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+else
+  " Fall back to using git ls-files if Ag is not available
+  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+endif
+" }}}
+
+" ag {{{
+nnoremap <Leader>a :Ag<Space>
 " }}}

@@ -18,7 +18,9 @@ if [ -z $HOME/.envs ]; then
   mkdir $HOME/.envs
 fi
 
-source /usr/local/bin/virtualenvwrapper.sh
+if [-a /usr/local/bin/virtualenvwrapper.sh]; then
+  source /usr/local/bin/virtualenvwrapper.sh
+fi
 
 export PATH=/usr/local/cuda/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -43,3 +45,7 @@ alias gc='git commit'
 alias ga='git add'
 
 export C_INCLUDE_PATH=/opt/intel/lib:$C_INCLUDE_PATH
+
+if [-a $HOME/.zshrc.ext]; then
+  source ~/.zshrc.ext
+fi

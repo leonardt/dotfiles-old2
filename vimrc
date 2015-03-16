@@ -55,6 +55,7 @@ Plug 'hdima/python-syntax'
 Plug 'lokaltog/vim-easymotion'
 
 Plug 'w0ng/vim-hybrid'
+Plug 'chriskempson/base16-vim'
 Plug 'bling/vim-airline'
 
 Plug 'ctrlpvim/ctrlp.vim'
@@ -147,7 +148,9 @@ endif
 
 " colorscheme {{{
 let g:hybrid_use_Xresources = 1
-colorscheme hybrid
+" colorscheme hybrid
+set background=dark
+colorscheme base16-embers
 " }}}
 
 " Neocomplete {{{
@@ -230,8 +233,11 @@ let python_highlight_all = 1  " python-syntax
 " }}}
 
 " airline {{{
-let g:airline_theme = 'hybridline'
-let g:airline_powerline_fonts = 1
+" let g:airline_theme = 'hybridline'
+let g:airline_theme = 'base16'
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+" let g:airline_powerline_fonts = 1
 " }}}
 
 " fugitive {{{

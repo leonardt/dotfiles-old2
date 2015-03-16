@@ -41,3 +41,5 @@ alias gps='git push'
 alias gco='git checkout'
 alias gc='git commit'
 alias ga='git add'
+
+export C_INCLUDE_PATH=/opt/intel/lib:$C_INCLUDE_PATH

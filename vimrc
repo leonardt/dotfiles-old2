@@ -58,6 +58,7 @@ Plug 'lokaltog/vim-easymotion'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/base16-vim'
 Plug 'bling/vim-airline'
+Plug 'edkolev/tmuxline.vim'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'

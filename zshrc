@@ -22,6 +22,7 @@ fi
 
 export PATH=/usr/local/cuda/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Completion
 autoload -Uz compinit
@@ -45,3 +46,5 @@ alias ga='git add'
 export C_INCLUDE_PATH=/opt/intel/lib:$C_INCLUDE_PATH
 
 [ -f $HOME/.zshrc.ext ] && source ~/.zshrc.ext
+
+export NVIM_TUI_ENABLE_CURSOR_SHAPE=1

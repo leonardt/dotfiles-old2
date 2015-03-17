@@ -8,7 +8,7 @@ if has('vim_starting')
  endif
 
  " Required:
- set runtimepath+=~/.vim/bundle/neobundle.vim/
+ " set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 
 filetype plugin indent on
@@ -44,6 +44,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-dispatch'
 
 Plug 'szw/vim-ctrlspace'
 Plug 'Raimondi/delimitMate'
@@ -60,6 +61,11 @@ Plug 'bling/vim-airline'
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
+
+Plug 'rmartinjak/vim-nesc'
+Plug 'thinca/vim-qfreplace'
+
+Plug 'benekastah/neomake'
 
 call plug#end()
 " call neobundle#end()
@@ -148,9 +154,14 @@ endif
 
 " colorscheme {{{
 let g:hybrid_use_Xresources = 1
-" colorscheme hybrid
-set background=dark
-colorscheme base16-embers
+colorscheme hybrid
+"set background=dark
+"colorscheme base16-embers
+let g:airline_theme = 'hybridline'
+" let g:airline_theme = 'base16'
+" let g:airline_left_sep = ''
+" let g:airline_right_sep = ''
+let g:airline_powerline_fonts = 1
 " }}}
 
 " Neocomplete {{{
@@ -232,14 +243,6 @@ let python_highlight_all = 1  " python-syntax
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
 " }}}
 
-" airline {{{
-" let g:airline_theme = 'hybridline'
-let g:airline_theme = 'base16'
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-" let g:airline_powerline_fonts = 1
-" }}}
-
 " fugitive {{{
 nnoremap <leader>gs :Gstatus<CR>
 " }}}
@@ -314,6 +317,7 @@ else
 endif
 " }}}
 
-" ag {{{
 nnoremap <Leader>a :Ag<Space>
-" }}}
+
+autocmd! BufWritePost * Neomake
+nnoremap <Leader>c :Neomake!<CR>

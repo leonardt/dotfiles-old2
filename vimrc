@@ -99,7 +99,7 @@ set ignorecase
 set smartcase
 
 set wrap
-set textwidth=80
+set textwidth=79
 " set number set relativenumber
 
 set cursorline

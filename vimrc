@@ -64,6 +64,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 
 Plug 'rmartinjak/vim-nesc'
+
 Plug 'thinca/vim-qfreplace'
 
 Plug 'benekastah/neomake'
@@ -322,3 +323,7 @@ nnoremap <Leader>a :Ag<Space>
 
 autocmd! BufWritePost * Neomake
 nnoremap <Leader>c :Neomake!<CR>
+
+au BufNewFile,BufRead *.nc set filetype=nc
+
+autocmd FileType python setlocal makeprg=nosetests

@@ -90,6 +90,7 @@ set backspace=indent,eol,start
 set history=1000
 set undofile
 set undoreload=10000
+set showtabline=0
 
 set autoindent
 set smartindent
@@ -327,3 +328,11 @@ nnoremap <Leader>c :Neomake!<CR>
 au BufNewFile,BufRead *.nc set filetype=nc
 
 autocmd FileType python setlocal makeprg=nosetests
+
+" ctrlspace {{{
+if executable("ag")
+  let g:ctrlspace_glob_command = 'ag -l --nocolor -g ""'
+endif
+
+let g:ctrlspace_load_last_workspace_on_start=1
+" }}}

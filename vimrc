@@ -57,6 +57,7 @@ Plug 'lokaltog/vim-easymotion'
 
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/base16-vim'
+Plug 'whatyouhide/vim-gotham'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 
@@ -156,11 +157,12 @@ endif
 
 " colorscheme {{{
 let g:hybrid_use_Xresources = 1
-colorscheme hybrid
-"set background=dark
-"colorscheme base16-embers
-let g:airline_theme = 'hybridline'
-" let g:airline_theme = 'base16'
+" colorscheme hybrid
+" set background=dark
+" colorscheme base16-embers
+"let g:airline_theme = 'hybridline'
+colorscheme gotham
+let g:airline_theme = 'gotham'
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''
 let g:airline_powerline_fonts = 1

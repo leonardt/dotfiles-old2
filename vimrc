@@ -58,6 +58,7 @@ Plug 'lokaltog/vim-easymotion'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
+Plug 'junegunn/seoul256.vim'
 Plug 'morhetz/gruvbox'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
@@ -163,7 +164,7 @@ let g:hybrid_use_Xresources = 1
 set background=dark
 " colorscheme base16-embers
 "let g:airline_theme = 'hybridline'
-colorscheme gruvbox
+colorscheme seoul256
 let g:airline_theme = 'gruvbox'
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''

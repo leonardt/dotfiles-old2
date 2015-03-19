@@ -162,10 +162,10 @@ endif
 let g:hybrid_use_Xresources = 1
 " colorscheme hybrid
 set background=dark
-" colorscheme base16-embers
-"let g:airline_theme = 'hybridline'
-colorscheme seoul256
-let g:airline_theme = 'gruvbox'
+colorscheme base16-flat
+let g:airline_theme = 'base16'
+" colorscheme seoul256
+" let g:airline_theme = 'gruvbox'
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''
 let g:airline_powerline_fonts = 1

@@ -5,7 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("990920bac6d35106d59ded4c9fafe979fb91dc78c86e77d742237bc7da90d758" "2e11112c059abb3609d56ba4bd8d755a90888ab5bcbc679cd7082cc02e30ad3c" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))))
+    ("3fd36152f5be7e701856c3d817356f78a4b1f4aefbbe8bbdd1ecbfa557b50006" "82d2cac368ccdec2fcc7573f24c3f79654b78bf133096f9b40c20d97ec1d8016" "628278136f88aa1a151bb2d6c8a86bf2b7631fbea5f0f76cba2a0079cd910f7d" "06f0b439b62164c6f8f84fdda32b62fb50b6d00e8b01c2208e55543a6337433a" "be50a45342f47158a8d34f54ffecc63f55dbdf66ad672c171c48e9dac56fff52" "0ba649556dc51762e6794b92017f6f7406754ae3136eafef686d81c6da176cc5" "990920bac6d35106d59ded4c9fafe979fb91dc78c86e77d742237bc7da90d758" "2e11112c059abb3609d56ba4bd8d755a90888ab5bcbc679cd7082cc02e30ad3c" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -17,6 +17,9 @@
 (cask-initialize)
 (require 'pallet)
 (pallet-mode t)
+
+(require 'saveplace)
+(setq-default save-place t)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -31,6 +34,8 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
+(setq undo-tree-history-directory-alist
+      `((".*" . ,temporary-file-directory)))
 
 ;; compile
 (setq compilation-always-kill t)
@@ -57,7 +62,31 @@
 (setq inhibit-startup-screen t)
 (setq ring-bell-function 'ignore)
 
+(require 'undo-tree)
+(global-undo-tree-mode)
+(setq undo-tree-auto-save-history t)
+
 (global-hl-line-mode)
+
+;; Show absolute line number for current line
+(defvar linum-relative-current-symbol "")
+(require 'linum-relative)
+(setq linum-relative-format "%3s ")
+
+(global-linum-mode 1)
+;; (linum-on)
+
+
+;; (defadvice linum-update-window (around linum-dynamic activate)
+;;   (let* ((w (length (number-to-string
+;;                      (count-lines (point-min) (point-max)))))
+;;          (linum-format (concat " %" (number-to-string w) "d ")))
+;;     ad-do-it))
+
+(fringe-mode -1)
+(require 'linum-off)
+
+(require 'evil)
 
 (evil-mode 1)
 (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
@@ -66,6 +95,8 @@
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
 (setq evilnc-hotkey-comment-operator "gc")
+(require 'evil-nerd-commenter)
+
 (add-hook 'c-mode-common-hook
   (lambda ()
     ;; Preferred comment style
@@ -85,11 +116,12 @@
 (add-hook 'term-mode-hook (lambda()
         (setq yas-dont-activate t)))
 
-;; (require 'smartparens-config)
+(require 'smartparens-config)
 (setq sp-autoskip-closing-pair 'always)
 (show-smartparens-global-mode t)
 (smartparens-global-mode t)
 
+(require 'magit)
 (evil-add-hjkl-bindings magit-log-mode-map 'emacs)
 (evil-add-hjkl-bindings magit-commit-mode-map 'emacs)
 (evil-add-hjkl-bindings magit-branch-manager-mode-map 'emacs
@@ -135,6 +167,7 @@
 (set-face-attribute 'helm-source-header nil :height 0.1)
 (helm-autoresize-mode t)
 
+(require 'helm)
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
@@ -166,7 +199,7 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; (load-theme 'gotham t)
-(load-theme 'darktooth t)
+(load-theme 'zenburn t)
 
 (sml/setup)
 

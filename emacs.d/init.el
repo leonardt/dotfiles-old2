@@ -68,6 +68,8 @@
 
 (global-hl-line-mode)
 
+(setq-default truncate-lines t)
+
 ;; Show absolute line number for current line
 (defvar linum-relative-current-symbol "")
 (require 'linum-relative)
@@ -191,6 +193,10 @@
 (define-key company-active-map (kbd "C-p") 'company-select-previous)
 (define-key company-active-map (kbd "<tab>") 'company-select-next)
 (define-key company-active-map (kbd "<backtab>") 'company-select-previous)
+;; 0.1 second delay before the pop-up appears
+(setq company-idle-delay 0.0)
+;; you only need to enter one character in a buffer before auto-completion starts
+(setq company-minimum-prefix-length 1)
 
 (setq company-global-modes
     '(not
@@ -199,7 +205,7 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; (load-theme 'gotham t)
-(load-theme 'zenburn t)
+(load-theme 'gruvbox t)
 
 (sml/setup)
 

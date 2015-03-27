@@ -58,6 +58,7 @@ Plug 'lokaltog/vim-easymotion'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
+Plug 'jnurmine/Zenburn'
 Plug 'junegunn/seoul256.vim'
 Plug 'morhetz/gruvbox'
 Plug 'bling/vim-airline'
@@ -161,15 +162,21 @@ endif
 " colorscheme {{{
 let g:hybrid_use_Xresources = 1
 " colorscheme hybrid
-" set background=dark
+set background=dark
 " colorscheme base16-flat
+" colorscheme seoul256
+" colorscheme gruvbox
+" let g:airline_theme = 'gruvbox'
 colorscheme gotham
 let g:airline_theme = 'gotham'
-" colorscheme seoul256
-" let g:airline_theme = 'gruvbox'
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''
 let g:airline_powerline_fonts = 1
+
+if has('gui_running')
+  set guifont=Droid\ Sans\ Mono\ For\ Powerline:h12
+  set guioptions= " Nothing
+endif
 " }}}
 
 " Neocomplete {{{
@@ -332,7 +339,7 @@ nnoremap <Leader>c :Neomake!<CR>
 
 au BufNewFile,BufRead *.nc set filetype=nc
 
-autocmd FileType python setlocal makeprg=nosetests
+" autocmd FileType python setlocal makeprg=nosetests
 
 " ctrlspace {{{
 if executable("ag")

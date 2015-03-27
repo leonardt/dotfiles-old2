@@ -60,6 +60,8 @@ Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
 Plug 'jnurmine/Zenburn'
 Plug 'junegunn/seoul256.vim'
+Plug 'romainl/Apprentice'
+Plug 'ajh17/Spacegray.vim'
 Plug 'morhetz/gruvbox'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
@@ -161,14 +163,17 @@ endif
 
 " colorscheme {{{
 let g:hybrid_use_Xresources = 1
-" colorscheme hybrid
-set background=dark
+colorscheme hybrid
+let g:airline_theme = 'hybridline'
+" set background=dark
 " colorscheme base16-flat
 " colorscheme seoul256
 " colorscheme gruvbox
 " let g:airline_theme = 'gruvbox'
-colorscheme gotham
-let g:airline_theme = 'gotham'
+" colorscheme gotham
+" let g:airline_theme = 'gotham'
+" colorscheme spacegray
+" let g:airline_theme = 'apprentice'
 " let g:airline_left_sep = ''
 " let g:airline_right_sep = ''
 let g:airline_powerline_fonts = 1

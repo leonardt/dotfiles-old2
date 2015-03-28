@@ -5,7 +5,11 @@ source "${HOME}/dotfiles/zsh/zgen/zgen.zsh"
 if ! zgen saved; then
   echo "Creating a zgen save"
 
-  # zgen oh-my-zsh
+  zgen oh-my-zsh
+  zgen oh-my-zsh plugins/git
+  zgen oh-my-zsh plugins/command-not-found
+  zgen oh-my-zsh plugins/virtualenvwrapper
+  zgen oh-my-zsh plugins/sudo
 
   zgen load zsh-users/zsh-syntax-highlighting
   zgen load zsh-users/zsh-completions src
@@ -32,7 +36,7 @@ if [ -z $HOME/.envs ]; then
   mkdir $HOME/.envs
 fi
 
-[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+# [ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
 export PATH=/usr/local/cuda/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,9 +1,23 @@
-fpath=( "$HOME/dotfiles/zsh" $fpath )
+# fpath=( "$HOME/dotfiles/zsh" $fpath )
 
-autoload -U promptinit && promptinit
-prompt pure
+source "${HOME}/dotfiles/zsh/zgen/zgen.zsh"
 
-source $HOME/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if ! zgen saved; then
+  echo "Creating a zgen save"
+
+  # zgen oh-my-zsh
+
+  zgen load zsh-users/zsh-syntax-highlighting
+  zgen load zsh-users/zsh-completions src
+  zgen load sindresorhus/pure
+
+  zgen save
+fi
+
+# autoload -U promptinit && promptinit
+# prompt pure
+
+# source $HOME/dotfiles/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 if [[ $(uname -s) == 'Darwin' ]]; then
   alias ls='ls -G' # Mac OSX support
@@ -22,7 +36,7 @@ fi
 
 export PATH=/usr/local/cuda/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
+# [ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Completion
 autoload -Uz compinit
@@ -50,3 +64,7 @@ export C_INCLUDE_PATH=/opt/intel/lib:$C_INCLUDE_PATH
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 
 export PATH="$HOME/.cask/bin:$PATH"
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey -M vicmd v edit-command-line

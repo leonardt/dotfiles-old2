@@ -55,6 +55,7 @@
 
 ;; tramp, for sudo access
 (require 'tramp)
+(setenv "TMPDIR" "/tmp")
 ;; keep in mind known issues with zsh - see emacs wiki
 (setq tramp-default-method "ssh")
 

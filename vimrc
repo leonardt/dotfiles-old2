@@ -163,13 +163,13 @@ endif
 
 " colorscheme {{{
 let g:hybrid_use_Xresources = 1
-colorscheme hybrid
-let g:airline_theme = 'hybridline'
-" set background=dark
+" colorscheme hybrid
+" let g:airline_theme = 'hybridline'
+set background=dark
 " colorscheme base16-flat
 " colorscheme seoul256
-" colorscheme gruvbox
-" let g:airline_theme = 'gruvbox'
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox'
 " colorscheme gotham
 " let g:airline_theme = 'gotham'
 " colorscheme spacegray

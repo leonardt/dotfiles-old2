@@ -3,12 +3,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
  '(custom-safe-themes
    (quote
     ("08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "2e11112c059abb3609d56ba4bd8d755a90888ab5bcbc679cd7082cc02e30ad3c" "f0b0710b7e1260ead8f7808b3ee13c3bb38d45564e369cbe15fc6d312f0cd7a0" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
+ '(display-battery-mode t)
+ '(display-time-mode t)
  '(elpy-modules
    (quote
-    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults))))
+    (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -47,8 +51,8 @@
       `((".*" . ,temporary-file-directory)))
 
 ;; compile
-(setq compilation-always-kill t)
-(setq compilation-ask-about-save nil)
+(setq-default compilation-always-kill t)
+(setq-default compilation-ask-about-save nil)
 
 ;; clean up old buffers periodically
 (require 'midnight)
@@ -109,7 +113,7 @@
 (global-evil-surround-mode t)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
-(setq evilnc-hotkey-comment-operator "gc")
+(setq-default evilnc-hotkey-comment-operator "gc")
 (require 'evil-nerd-commenter)
 
 (add-hook 'c-mode-common-hook
@@ -126,9 +130,6 @@
 ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
 ;; (define-key yas-minor-mode-map (kbd "C-k") 'yas-expand)
 ;; (define-key evil-insert-state-map (kbd "C-k") 'yas-expand)
-
-(add-hook 'term-mode-hook (lambda()
-        (setq yas-dont-activate t)))
 
 (require 'smartparens-config)
 (setq sp-autoskip-closing-pair 'always)
@@ -188,12 +189,12 @@
 (require 'helm)
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
+(define-key helm-map (kbd "C-i")   'helm-execute-persistent-action) ; make TAB works in terminal
+(define-key helm-map (kbd "C-z")   'helm-select-action) ; list actions using C-z
 
-(setq helm-semantic-fuzzy-match t
-      helm-imenu-fuzzy-match    t)
-(setq helm-buffers-fuzzy-matching t
+(setq helm-semantic-fuzzy-match   t
+      helm-imenu-fuzzy-match      t
+      helm-buffers-fuzzy-matching t
       helm-recentf-fuzzy-match    t)
 (helm-mode 1)
 
@@ -220,6 +221,10 @@
         ))
 
 (yas-global-mode 1)
+
+(add-hook 'term-mode-hook (lambda()
+        (setq yas-dont-activate t)))
+
 (defun check-expansion ()
   (save-excursion
     (if (looking-at "\\_>") t
@@ -313,19 +318,19 @@
 (diminish 'projectile-mode)
 (diminish 'magit-auto-revert-mode)
 
-(load-theme 'ample t)
+(load-theme 'gruvbox t)
 
 ;; (require 'powerline)
 ;; (powerline-default-theme)
 
-(setq sml/theme 'dark)
+(setq-default sml/theme 'dark)
 (sml/setup)
 
 ;; (add-to-list 'default-frame-alist
 ;; 	     '(font . "Droid Sans Mono-12"))
 
 (add-to-list 'default-frame-alist
-	     '(font . "Inconsolata-dz For Powerline-12"))
+	     '(font . "Inconsolata-g For Powerline-12"))
 
 ;; (set-frame-parameter (selected-frame) 'alpha '(95 95))
 

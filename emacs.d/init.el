@@ -6,9 +6,7 @@
  '(blink-cursor-mode nil)
  '(custom-safe-themes
    (quote
-    ("08efabe5a8f3827508634a3ceed33fa06b9daeef9c70a24218b70494acdf7855" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "2e11112c059abb3609d56ba4bd8d755a90888ab5bcbc679cd7082cc02e30ad3c" "f0b0710b7e1260ead8f7808b3ee13c3bb38d45564e369cbe15fc6d312f0cd7a0" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "1297a022df4228b81bc0436230f211bad168a117282c20ddcba2db8c6a200743" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" default)))
- '(display-battery-mode t)
- '(display-time-mode t)
+    ("8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "0ba649556dc51762e6794b92017f6f7406754ae3136eafef686d81c6da176cc5" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d" default)))
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
@@ -30,9 +28,11 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 
+(menu-bar-mode -1)
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(unless (display-graphic-p) (menu-bar-mode -1))
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 (display-time-mode 1)
 
@@ -53,6 +53,12 @@
 ;; compile
 (setq-default compilation-always-kill t)
 (setq-default compilation-ask-about-save nil)
+(require 'ansi-color)
+(defun colorize-compilation-buffer ()
+  (toggle-read-only)
+  (ansi-color-apply-on-region (point-min) (point-max))
+  (toggle-read-only))
+(add-hook 'compilation-filter-hook 'colorize-compilation-buffer)
 
 ;; clean up old buffers periodically
 (require 'midnight)
@@ -66,11 +72,19 @@
 (electric-indent-mode t)
 (electric-pair-mode t)
 
+(global-aggressive-indent-mode 1)
+
 ;; tramp, for sudo access
 (require 'tramp)
-;;(setenv "TMPDIR" "/tmp")
+(setenv "TMPDIR" "/tmp")
 ;; keep in mind known issues with zsh - see emacs wiki
-;;(setq tramp-default-method "ssh")
+(setq tramp-default-method "ssh")
+(add-to-list 'tramp-remote-path 'tramp-own-remote-path)
+;; Backup (file~) disabled and auto-save (#file#) locally to prevent delays in editing remote files
+(add-to-list 'backup-directory-alist
+             (cons tramp-file-name-regexp nil))
+(setq tramp-auto-save-directory temporary-file-directory)
+(setq tramp-verbose 10)
 
 (blink-cursor-mode -1)
 (setq inhibit-startup-screen t)
@@ -87,6 +101,12 @@
 
 (global-linum-mode 1)
 
+(require 'recentf)
+
+(add-to-list 'recentf-exclude "COMMIT_EDITMSG\\'")
+
+(recentf-mode +1)
+
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 ;; (linum-on)
 
@@ -99,6 +119,12 @@
 
 (fringe-mode -1)
 (require 'linum-off)
+(setq-default ispell-program-name "aspell")
+(setq-default ispell-dictionary "english")
+(require 'flyspell)
+(setq ispell-program-name "aspell")
+(add-hook 'markdown-mode-hook '(lambda () (flyspell-mode 1)))
+(add-hook 'text-mode-hook '(lambda () (flyspell-mode 1)))
 
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -108,21 +134,26 @@
 (require 'evil)
 
 (evil-mode 1)
+
+(require 'evil-terminal-cursor-changer)
+(unless (display-graphic-p)
+  (setq evil-visual-state-cursor 'box) ; █
+  (setq evil-insert-state-cursor 'bar) ; ⎸
+  (setq evil-emacs-state-cursor 'hbar) ; _
+)
+
 (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
 (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
 (global-evil-surround-mode t)
 (global-evil-leader-mode)
 (evil-leader/set-leader "<SPC>")
-(setq-default evilnc-hotkey-comment-operator "gc")
-(require 'evil-nerd-commenter)
 
-(add-hook 'c-mode-common-hook
-  (lambda ()
-    ;; Preferred comment style
-    (setq comment-start "// "
-          comment-end "")))
 (global-evil-snipe-mode 1)
 
+(evil-commentary-mode)
+
+(setq helm-projectile-fuzzy-match nil)
+(require 'helm-projectile)
 (projectile-global-mode)
 (helm-projectile-on)
 
@@ -153,7 +184,7 @@
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
 (evil-leader/set-key
- "<SPC>" 'helm-M-x
+ "x" 'helm-M-x
  "m" 'helm-mini
  "b" 'helm-buffers-list
  "y" 'helm-show-kill-ring
@@ -222,8 +253,9 @@
 
 (yas-global-mode 1)
 
-(add-hook 'term-mode-hook (lambda()
-        (setq yas-dont-activate t)))
+(add-hook 'term-mode-hook
+          (lambda()
+            (setq yas-dont-activate t)))
 
 (defun check-expansion ()
   (save-excursion
@@ -318,10 +350,10 @@
 (diminish 'projectile-mode)
 (diminish 'magit-auto-revert-mode)
 
+;; (require 'ample-theme)
+;; (load-theme 'solarized-light t)
 (load-theme 'ample t)
-
-;; (require 'powerline)
-;; (powerline-default-theme)
+(enable-theme 'ample)
 
 (setq-default sml/theme 'dark)
 (sml/setup)
@@ -330,7 +362,7 @@
 ;; 	     '(font . "Droid Sans Mono-12"))
 
 (add-to-list 'default-frame-alist
-	     '(font . "Inconsolata-g For Powerline-12"))
+             '(font . "Inconsolata-g For Powerline-12"))
 
 ;; (set-frame-parameter (selected-frame) 'alpha '(95 95))
 

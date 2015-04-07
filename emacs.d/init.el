@@ -153,8 +153,8 @@
 (define-key global-map (kbd "RET") 'newline-and-indent)
 
 (evil-leader/set-key
- "<SPC>" 'helm-mini
- "x" 'helm-M-x
+ "<SPC>" 'helm-M-x
+ "m" 'helm-mini
  "b" 'helm-buffers-list
  "y" 'helm-show-kill-ring
  "i" 'helm-semantic-or-imenu
@@ -318,7 +318,7 @@
 (diminish 'projectile-mode)
 (diminish 'magit-auto-revert-mode)
 
-(load-theme 'gruvbox t)
+(load-theme 'ample t)
 
 ;; (require 'powerline)
 ;; (powerline-default-theme)

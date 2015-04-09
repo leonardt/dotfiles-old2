@@ -34,7 +34,7 @@
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
-(display-time-mode 1)
+;; (display-time-mode 1)
 
 (require 'undo-tree)
 (global-undo-tree-mode)
@@ -78,7 +78,8 @@
 (require 'tramp)
 (setenv "TMPDIR" "/tmp")
 ;; keep in mind known issues with zsh - see emacs wiki
-(setq tramp-default-method "ssh")
+(setq tramp-default-method "sshx")
+;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 ;; Backup (file~) disabled and auto-save (#file#) locally to prevent delays in editing remote files
 (add-to-list 'backup-directory-alist
@@ -125,6 +126,8 @@
 (setq ispell-program-name "aspell")
 (add-hook 'markdown-mode-hook '(lambda () (flyspell-mode 1)))
 (add-hook 'text-mode-hook '(lambda () (flyspell-mode 1)))
+(require 'helm-flyspell)
+(define-key flyspell-mode-map (kbd "C-;") 'helm-flyspell-correct)
 
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
@@ -140,7 +143,7 @@
   (setq evil-visual-state-cursor 'box) ; █
   (setq evil-insert-state-cursor 'bar) ; ⎸
   (setq evil-emacs-state-cursor 'hbar) ; _
-)
+  )
 
 (define-key evil-inner-text-objects-map "a" 'evil-inner-arg)
 (define-key evil-outer-text-objects-map "a" 'evil-outer-arg)
@@ -152,15 +155,11 @@
 
 (evil-commentary-mode)
 
-(setq helm-projectile-fuzzy-match nil)
+(require 'evil-org)
+
 (require 'helm-projectile)
 (projectile-global-mode)
 (helm-projectile-on)
-
-;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
-;; (define-key yas-minor-mode-map (kbd "TAB") nil)
-;; (define-key yas-minor-mode-map (kbd "C-k") 'yas-expand)
-;; (define-key evil-insert-state-map (kbd "C-k") 'yas-expand)
 
 (require 'smartparens-config)
 (setq sp-autoskip-closing-pair 'always)
@@ -230,10 +229,6 @@
 (helm-mode 1)
 
 (require 'company)
-
-;; (add-hook 'python-mode-hook 'anaconda-mode)
-;; (add-to-list 'company-backends 'company-anaconda)
-;; (add-hook 'python-mode-hook 'eldoc-mode)
 
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -351,19 +346,17 @@
 (diminish 'magit-auto-revert-mode)
 
 ;; (require 'ample-theme)
-;; (load-theme 'solarized-light t)
-(load-theme 'ample t)
-(enable-theme 'ample)
+(load-theme 'leuven t)
+;; (load-theme 'ample t)
+;; (enable-theme 'ample)
 
-(setq-default sml/theme 'dark)
+(setq-default sml/theme 'light)
 (sml/setup)
 
 ;; (add-to-list 'default-frame-alist
 ;; 	     '(font . "Droid Sans Mono-12"))
 
+;; (add-to-list 'default-frame-alist
+;;              '(font . "Inconsolata-g For Powerline-12"))
 (add-to-list 'default-frame-alist
-             '(font . "Inconsolata-g For Powerline-12"))
-
-;; (set-frame-parameter (selected-frame) 'alpha '(95 95))
-
-;; (add-to-list 'default-frame-alist '(alpha 95 95))
+             '(font . "Monaco-12"))

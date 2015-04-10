@@ -10,6 +10,9 @@
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
+ '(package-selected-packages
+   (quote
+    (helm projectile smart-mode-line yasnippet zenburn-theme web-mode warm-night-theme use-package solarized-theme smex smartparens smart-mode-line-powerline-theme rainbow-delimiters prodigy popwin pip-requirements pandoc-mode pallet nyan-mode multiple-cursors material-theme markdown-mode magit linum-relative linum-off idle-highlight-mode htmlize helm-projectile helm-ag gruvbox-theme gotham-theme flycheck-cask flatui-theme expand-region exec-path-from-shell evil-terminal-cursor-changer evil-surround evil-snipe evil-nerd-commenter evil-leader evil-jumper evil-commentary evil-args elpy drag-stuff darktooth-theme company-anaconda color-theme-sanityinc-tomorrow ample-theme aggressive-indent)))
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

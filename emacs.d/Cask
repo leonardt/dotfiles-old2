@@ -41,6 +41,7 @@
 (depends-on "linum-relative")
 (depends-on "magit")
 (depends-on "markdown-mode")
+(depends-on "material-theme")
 (depends-on "package-build")
 (depends-on "pallet")
 (depends-on "pandoc-mode")
@@ -57,4 +58,5 @@
 (depends-on "solarized-theme")
 (depends-on "undo-tree")
 (depends-on "use-package")
+(depends-on "web-mode")
 (depends-on "yasnippet")

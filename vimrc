@@ -73,7 +73,7 @@ Plug 'rmartinjak/vim-nesc'
 
 Plug 'thinca/vim-qfreplace'
 
-Plug 'benekastah/neomake'
+" Plug 'benekastah/neomake'
 
 call plug#end()
 " call neobundle#end()
@@ -168,6 +168,7 @@ let g:hybrid_use_Xresources = 1
 set background=dark
 " colorscheme base16-flat
 " colorscheme seoul256
+" let g:gruvbox_termcolors=16
 colorscheme gruvbox
 let g:airline_theme = 'gruvbox'
 " colorscheme gotham

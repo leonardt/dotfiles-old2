@@ -6,7 +6,16 @@
  '(blink-cursor-mode nil)
  '(custom-safe-themes
    (quote
-    ("f0b0710b7e1260ead8f7808b3ee13c3bb38d45564e369cbe15fc6d312f0cd7a0" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "0ba649556dc51762e6794b92017f6f7406754ae3136eafef686d81c6da176cc5" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d" default)))
+    ("f0b0710b7e1260ead8f7808b3ee13c3bb38d45564e369cbe15fc6d312f0cd7a0"
+     "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223"
+     "8d6fb24169d94df45422617a1dfabf15ca42a97d594d28b3584dc6db711e0e0b"
+     "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879"
+     "0ba649556dc51762e6794b92017f6f7406754ae3136eafef686d81c6da176cc5"
+     "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa"
+     "1db337246ebc9c083be0d728f8d20913a0f46edc0a00277746ba411c149d7fe5"
+     "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e"
+     "764e3a6472a3a4821d929cdbd786e759fab6ef6c2081884fca45f1e1e3077d1d"
+     default)))
  '(elpy-modules
    (quote
     (elpy-module-company elpy-module-eldoc elpy-module-flymake elpy-module-pyvenv elpy-module-yasnippet elpy-module-sane-defaults)))
@@ -78,7 +87,8 @@
 (require 'tramp)
 (setenv "TMPDIR" "/tmp")
 ;; keep in mind known issues with zsh - see emacs wiki
-(setq tramp-default-method "sshx")
+;; (setq tramp-default-method "sshx")
+(setq tramp-default-method "ssh")
 ;; (eval-after-load 'tramp '(setenv "SHELL" "/bin/bash"))
 (add-to-list 'tramp-remote-path 'tramp-own-remote-path)
 ;; Backup (file~) disabled and auto-save (#file#) locally to prevent delays in editing remote files
@@ -158,6 +168,7 @@
 (require 'evil-org)
 
 (require 'helm-projectile)
+(setq projectile-mode-line "Projectile")
 (projectile-global-mode)
 (helm-projectile-on)
 

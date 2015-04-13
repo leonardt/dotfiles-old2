@@ -38,6 +38,7 @@
 (depends-on "helm-projectile")
 (depends-on "highlight-indentation")
 (depends-on "htmlize")
+(depends-on "hydra")
 (depends-on "let-alist")
 (depends-on "leuven-theme")
 (depends-on "linum-off")

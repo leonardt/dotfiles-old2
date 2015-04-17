@@ -73,7 +73,10 @@ Plug 'rmartinjak/vim-nesc'
 
 Plug 'thinca/vim-qfreplace'
 
-" Plug 'benekastah/neomake'
+Plug 'benekastah/neomake'
+Plug 'vim-scripts/SyntaxRange'
+
+Plug 'petRUShka/vim-opencl'
 
 call plug#end()
 " call neobundle#end()
@@ -354,3 +357,6 @@ endif
 
 let g:ctrlspace_load_last_workspace_on_start=1
 " }}}
+
+autocmd Syntax * call SyntaxRange#Include('@begin=c@', '@end=c@', 'c', 'NonText')
+autocmd Syntax * call SyntaxRange#Include('@begin=cl@', '@end=cl@', 'opencl', 'NonText')

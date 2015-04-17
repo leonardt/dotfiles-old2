@@ -360,11 +360,11 @@
 (diminish 'magit-auto-revert-mode)
 
 ;; (require 'ample-theme)
-;; (setq-default sml/theme 'respectful)
-;; (sml/setup)
-(load-theme 'leuven t)
-;; (load-theme 'ample t)
-;; (enable-theme 'ample)
+(setq-default sml/theme 'dark)
+(sml/setup)
+;; (load-theme 'leuven t)
+(load-theme 'ample t)
+(enable-theme 'ample)
 
 
 ;; (add-to-list 'default-frame-alist

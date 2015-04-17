@@ -12,11 +12,17 @@
    ;; of a list then all discovered layers will be installed.
    dotspacemacs-configuration-layers '(osx
                                        perspectives
-                                       company-mode
+                                       auto-completion
+                                       syntax-checking
+                                       evil-commentary
+                                       evil-snipe
+                                       org
+                                       lua
                                        python
                                        c-c++
                                        markdown
-                                       git)
+                                       git
+                                       themes-megapack)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -41,17 +47,18 @@ before layers configuration."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(solarized-light
+   dotspacemacs-themes '(gotham
+                         leuven
+                         solarized-light
                          zenburn
                          solarized-dark
-                         leuven
                          monokai)
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
    ;; size to make separators look not too crappy.
    dotspacemacs-default-font '("Inconsolata-g"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -131,7 +138,7 @@ layers configuration."
  '(ahs-inhibit-face-list nil)
  '(custom-safe-themes
    (quote
-    ("e80932ca56b0f109f8545576531d3fc79487ca35a9a9693b62bf30d6d08c9aaf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "4dd1b115bc46c0f998e4526a3b546985ebd35685de09bc4c84297971c822750e" default)))
+    ("bede70e4b2654751936d634040347bb4704fa956ecf7dceab03661a75e46a8ca" "e80932ca56b0f109f8545576531d3fc79487ca35a9a9693b62bf30d6d08c9aaf" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "4dd1b115bc46c0f998e4526a3b546985ebd35685de09bc4c84297971c822750e" default)))
  '(ring-bell-function (quote ignore) t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

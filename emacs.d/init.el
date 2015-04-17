@@ -357,6 +357,9 @@
 ;;(load-theme 'leuven t)
 (load-theme 'gruvbox t)
 ;; (enable-theme 'ample)
+;; (load-theme 'leuven t)
+;; (load-theme 'ample t)
+;; (enable-theme 'ample)
 
 
 ;; (add-to-list 'default-frame-alist

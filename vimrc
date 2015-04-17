@@ -77,6 +77,8 @@ Plug 'benekastah/neomake'
 Plug 'vim-scripts/SyntaxRange'
 
 Plug 'petRUShka/vim-opencl'
+Plug 'sickill/vim-monokai'
+Plug 'mdlerch/vim-tungsten'
 
 call plug#end()
 " call neobundle#end()
@@ -172,18 +174,20 @@ set background=dark
 " colorscheme base16-flat
 " colorscheme seoul256
 " let g:gruvbox_termcolors=16
-colorscheme gruvbox
-let g:airline_theme = 'gruvbox'
-" colorscheme gotham
-" let g:airline_theme = 'gotham'
-" colorscheme spacegray
+" colorscheme gruvbox
+" let g:airline_theme = 'gruvbox'
+colorscheme gotham
+let g:airline_theme = 'gotham'
+" colorscheme apprentice
 " let g:airline_theme = 'apprentice'
+" colorscheme monokai
+" let g:airline_theme = 'powerlineish'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
 let g:airline_powerline_fonts = 1
 
 if has('gui_running')
-  set guifont=Droid\ Sans\ Mono\ For\ Powerline:h12
+  set guifont=Inconsolata-g\ For\ Powerline:h12
   set guioptions= " Nothing
 endif
 " }}}
@@ -343,8 +347,9 @@ endif
 
 nnoremap <Leader>a :Ag<Space>
 
-autocmd! BufWritePost * Neomake
-nnoremap <Leader>c :Neomake!<CR>
+" autocmd! BufWritePost * Neomake
+" nnoremap <Leader>c :Neomake!<CR>
+nnoremap <Leader>c :Dispatch<CR>
 
 au BufNewFile,BufRead *.nc set filetype=nc
 

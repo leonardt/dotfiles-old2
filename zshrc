@@ -63,10 +63,10 @@ alias ga='git add'
 
 export C_INCLUDE_PATH=/opt/intel/lib:$C_INCLUDE_PATH
 
-[ -f $HOME/.zshrc.ext ] && source ~/.zshrc.ext
-
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
-export NVIM_TUI_ENABLE_TRUE_COLOR=1
+# export NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+[ -f $HOME/.zshrc.ext ] && source ~/.zshrc.ext
 
 export PATH="$HOME/.cask/bin:$PATH"
 

@@ -161,8 +161,8 @@ endif
 " colorscheme {{{
 " let g:hybrid_use_Xresources = 1
 set background=dark
-colorscheme gruvbox
-let g:airline_theme = 'gruvbox'
+colorscheme base16-default
+let g:airline_theme = 'base16'
 " colorscheme seoul256
 " let g:gruvbox_termcolors=16
 " colorscheme gruvbox

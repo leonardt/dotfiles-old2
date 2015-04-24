@@ -1,26 +1,28 @@
-# fpath=( "$HOME/dotfiles/zsh" $fpath )
+fpath=( "$HOME/dotfiles/zsh" $fpath )
 
-# source "${HOME}/dotfiles/zsh/zgen/zgen.zsh"
-#
-# if ! zgen saved; then
-#   echo "Creating a zgen save"
-#
-#   # zgen oh-my-zsh
-#   # zgen oh-my-zsh plugins/git
-#   # zgen oh-my-zsh plugins/command-not-found
-#   # zgen oh-my-zsh plugins/virtualenvwrapper
-#   # zgen oh-my-zsh plugins/sudo
-#
-#   # zgen load zsh-users/zsh-syntax-highlighting
-#   # zgen load zsh-users/zsh-completions src
-#   # zgen load sindresorhus/pure
-#
-#   zgen save
-# fi
+source "${HOME}/dotfiles/zsh/zgen/zgen.zsh"
+
+if ! zgen saved; then
+  echo "Creating a zgen save"
+
+  zgen oh-my-zsh
+  zgen oh-my-zsh plugins/git
+  zgen oh-my-zsh plugins/command-not-found
+  zgen oh-my-zsh plugins/virtualenvwrapper
+  zgen oh-my-zsh plugins/sudo
+
+  zgen load zsh-users/zsh-syntax-highlighting
+  zgen load zsh-users/zsh-completions src
+  # zgen load sindresorhus/pure
+
+  zgen save
+fi
 
 
 autoload -U colors && colors
-PROMPT="%{$fg[cyan]%}%(! %{$fg[red]%} )-%{$fg[cyan]%}%(1j %{$fg[green]%} )-%{$fg[cyan]%}%(?  %{$fg[red]%})-%{$reset_color%} "
+# ─
+PROMPT="%{$fg[cyan]%}%(! %{$fg[red]%} )─%{$fg[cyan]%}%(1j %{$fg[green]%} )─%{$fg[cyan]%}%(?  %{$fg[red]%})─%{$reset_color%} "
+RPROMPT="%{$fg[green]%}%m%{$reset_color%}"
 # autoload -U promptinit
 # promptinit
 # autoload -U promptinit && promptinit

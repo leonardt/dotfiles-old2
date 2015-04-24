@@ -19,10 +19,10 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer' }
 
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-
+Plug 'mhinz/vim-startify'
 
 Plug 'benmills/vimux'
-Plug 'jpalardy/vim-slime'
+" Plug 'jpalardy/vim-slime'
 
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-commentary'
@@ -42,14 +42,19 @@ if has("unix")
   endif
 endif
 
+Plug 'ntpeters/vim-better-whitespace'
 Plug 'Raimondi/delimitMate'
+Plug 'osyo-manga/vim-over'
 
 Plug 'mtth/scratch.vim'
+Plug 'wellle/targets.vim'
 
 Plug 'hynek/vim-python-pep8-indent'
 Plug 'justinmk/vim-sneak'
 Plug 'hdima/python-syntax'
+Plug 'ivanov/vim-ipython'
 
+Plug 'freeo/vim-kalisi'
 Plug 'w0ng/vim-hybrid'
 Plug 'chriskempson/base16-vim'
 Plug 'whatyouhide/vim-gotham'
@@ -57,7 +62,7 @@ Plug 'morhetz/gruvbox'
 Plug 'bling/vim-airline'
 Plug 'edkolev/tmuxline.vim'
 
-" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'rking/ag.vim'
 
 Plug 'rmartinjak/vim-nesc'
@@ -156,11 +161,12 @@ endif
 " colorscheme {{{
 " let g:hybrid_use_Xresources = 1
 set background=dark
-" colorscheme base16-flat
+colorscheme base16-harmonic16
+let g:airline_theme = 'base16'
 " colorscheme seoul256
 " let g:gruvbox_termcolors=16
-colorscheme gruvbox
-let g:airline_theme = 'gruvbox'
+" colorscheme gruvbox
+" let g:airline_theme = 'gruvbox'
 " colorscheme hybrid
 " let g:airline_theme = 'hybridline'
 " colorscheme gotham
@@ -245,21 +251,21 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " }}}
 
 " ctrlp {{{
-" let g:ctrlp_map = '<c-p>'
-" let g:ctrlp_cmd = 'CtrlP'
-" let g:ctrlp_working_path_mode = 'ra'
-" if executable('ag')
-"   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-"   let g:ctrlp_user_command =
-"     \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+if executable('ag')
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command =
+    \ 'ag %s --files-with-matches -g "" --ignore "\.git$\|\.hg$\|\.svn$"'
 
-"   " ag is fast enough that CtrlP doesn't need to cache
-"   let g:ctrlp_use_caching = 0
-" else
-"   " Fall back to using git ls-files if Ag is not available
-"   let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
-"   let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
-" endif
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+else
+  " Fall back to using git ls-files if Ag is not available
+  let g:ctrlp_custom_ignore = '\.git$\|\.hg$\|\.svn$'
+  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . --cached --exclude-standard --others']
+endif
 " " }}}
 
 nnoremap <Leader>a :Ag<Space>
@@ -284,10 +290,8 @@ call unite#custom#profile('default', 'context', {
   \ })
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
-" nnoremap <leader>f :<C-u>Unite -start-insert file_rec/neovim<CR>
-" nnoremap <C-p> :<C-u>Unite -start-insert file_rec/neovim<CR>
 nnoremap <leader>f :<C-u>Unite -start-insert file_rec/async:!<CR>
-nnoremap <C-p> :<C-u>Unite -start-insert file_rec/async:!<CR>
+" nnoremap <C-p> :<C-u>Unite -start-insert file_rec/async:!<CR>
 nnoremap <leader>b :<C-u>Unite buffer<CR>
 let g:unite_source_history_yank_enable = 1
 nnoremap <leader>y :<C-u>Unite history/yank<CR>
@@ -304,3 +308,10 @@ if executable('ag')
   let g:unite_source_grep_recursive_opt = ''
 endif
 " }}}
+
+" vim-slime {{{
+" let g:slime_target = "tmux"
+" let g:slime_python_ipython = 1
+" }}}
+
+let g:better_whitespace_filetypes_blacklist=['markdown']

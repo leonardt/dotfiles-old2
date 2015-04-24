@@ -21,8 +21,9 @@ fi
 
 autoload -U colors && colors
 # ─
+[[ "$SSH_CONNECTION" != '' ]] && prompt_username=' %n@%m'
 PROMPT="%{$fg[cyan]%}%(! %{$fg[red]%} )─%{$fg[cyan]%}%(1j %{$fg[green]%} )─%{$fg[cyan]%}%(?  %{$fg[red]%})─%{$reset_color%} "
-RPROMPT="%{$fg[green]%}%m%{$reset_color%}"
+RPROMPT="%{$fg[green]$prompt_username%}"
 # autoload -U promptinit
 # promptinit
 # autoload -U promptinit && promptinit

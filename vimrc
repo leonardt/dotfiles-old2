@@ -161,8 +161,8 @@ endif
 " colorscheme {{{
 " let g:hybrid_use_Xresources = 1
 set background=dark
-colorscheme base16-harmonic16
-let g:airline_theme = 'base16'
+colorscheme gruvbox
+let g:airline_theme = 'gruvbox'
 " colorscheme seoul256
 " let g:gruvbox_termcolors=16
 " colorscheme gruvbox
@@ -314,4 +314,4 @@ endif
 " let g:slime_python_ipython = 1
 " }}}
 
-let g:better_whitespace_filetypes_blacklist=['markdown']
+let g:better_whitespace_filetypes_blacklist=['markdown', 'unite']

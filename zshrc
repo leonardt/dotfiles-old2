@@ -20,9 +20,9 @@
 
 
 autoload -U colors && colors
-PROMPT="%{$fg[cyan]%(! $fg[red] )-$fg[cyan]%(1j $fg[green] )-$fg[cyan]%(?  $fg[red])-$reset_color%} "
-autoload -U promptinit
-promptinit
+PROMPT="%{$fg[cyan]%}%(! %{$fg[red]%} )-%{$fg[cyan]%}%(1j %{$fg[green]%} )-%{$fg[cyan]%}%(?  %{$fg[red]%})-%{$reset_color%} "
+# autoload -U promptinit
+# promptinit
 # autoload -U promptinit && promptinit
 # prompt pure
 
@@ -41,16 +41,18 @@ if [ -z $HOME/.envs ]; then
   mkdir $HOME/.envs
 fi
 
-# [ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
+[ -f /usr/local/bin/virtualenvwrapper.sh ] && source /usr/local/bin/virtualenvwrapper.sh
 
-export PATH=/usr/local/cuda/bin:$PATH
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 # [ -d /usr/local/share/zsh-completions ] && fpath=(/usr/local/share/zsh-completions $fpath)
 
 # Completion
 autoload -Uz compinit
 compinit
+setopt completealiases
 
+
+setopt HIST_IGNORE_DUPS  # Ignore duplicate lines in history
 # Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
 HISTSIZE=1000
 SAVEHIST=1000
@@ -66,13 +68,14 @@ alias gco='git checkout'
 alias gc='git commit'
 alias ga='git add'
 
-export C_INCLUDE_PATH=/opt/intel/lib:$C_INCLUDE_PATH
 
 export NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 [ -f $HOME/.zshrc.ext ] && source ~/.zshrc.ext
 
+export PATH=/usr/local/cuda/bin:$PATH
+export C_INCLUDE_PATH=/opt/intel/lib:$C_INCLUDE_PATH
 export PATH="$HOME/.cask/bin:$PATH"
 
 autoload -z edit-command-line

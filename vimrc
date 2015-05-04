@@ -32,6 +32,7 @@ Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-dispatch'
 
+Plug 'szw/vim-ctrlspace'
 Plug 'Shougo/unite.vim'
 if has("unix")
   let s:uname = system("uname -s")
@@ -270,7 +271,6 @@ endif
 
 nnoremap <Leader>a :Ag<Space>
 
-autocmd! BufWritePost * Neomake
 " nnoremap <Leader>c :Neomake!<CR>
 " nnoremap <Leader>c :Dispatch<CR>
 
@@ -278,16 +278,19 @@ au BufNewFile,BufRead *.nc set filetype=nc
 
 " autocmd FileType python setlocal makeprg=nosetests
 
-autocmd Syntax * call SyntaxRange#Include('@begin=c@', '@end=c@', 'c', 'NonText')
-autocmd Syntax * call SyntaxRange#Include('@begin=cl@', '@end=cl@', 'opencl', 'NonText')
+" autocmd Syntax * call SyntaxRange#Include('@begin=c@', '@end=c@', 'c', 'NonText')
+" autocmd Syntax * call SyntaxRange#Include('@begin=cl@', '@end=cl@', 'opencl', 'NonText')
 
-tnoremap <Esc> <c-\><c-n>
+if has("nvim")
+  tnoremap <Esc> <c-\><c-n>
+  autocmd! BufWritePost * Neomake
+endif
 
 " unite {{{
-call unite#custom#profile('default', 'context', {
-  \   'winheight': 20,
-  \   'direction': 'botright',
-  \ })
+" call unite#custom#profile('default', 'context', {
+"   \   'winheight': 20,
+"   \   'direction': 'botright',
+"   \ })
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
 call unite#filters#sorter_default#use(['sorter_rank'])
 nnoremap <leader>f :<C-u>Unite -start-insert file_rec/async:!<CR>
@@ -315,3 +318,9 @@ endif
 " }}}
 
 let g:better_whitespace_filetypes_blacklist=['markdown', 'unite']
+
+" ycm {{{
+" let g:ycm_auto_trigger = 0
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+" }}}
